@@ -1,49 +1,73 @@
-# Calendar API
-This is the server-side Spring Boot REST API for our calendar application.  
-Client side - https://github.com/anaalamed/calendar-client
+# Calendar API (Backend)
 
-## Capabilities
-* Users can register to the app using their email or login using their GitHub account.
+Backend service for a full-stack calendar management system built as a team project.
 
-* In the calendar, a user can create an event which holds various information.
-  * The event can be either public or private.
-  * The event has the following data: time, date, duration, location, and title.
-  * The event also holds a list of guests who can have different roles (Organizer, Admin, Guest) and different statuses (Approved, Rejected, Tentative).
-  * Any user who is not an organizer of the event can 'leave' the event, which will immediately hide the event from their calendar.
+Originally developed as a final engineering project in collaboration with Google (Start@Google backend training program).
 
-* The roles are divided by their permissions.
-  * Organizer - The one who created the event.
-    * Can update all of the information in the event.
-    * Can delete the event.
-    * Can invite and remove guests.
-    * Can change the role of other users from guests to admins and the other way around.
-  * Admin - Promoted by the organizer of an event.
-    * Can update event data except date, time, duration, title.
-    * Can invite or remove guests.
-  * Guest - can only respond to invites or leave events.
- 
- 
- * Calendar sharing
-   * Users can share their calendars with other users.
-   * Users can see multiple calendars on top of each other.
- 
- * Notifications
-   * Users can choose their notification settings.
-   * The system offers email notifications and in-app notifications via pop-ups.
-   * Notification types:
-     * New event invitation.
-     * User status changed.
-     * Event data changed.
-     * Event canceled.
-     * User was uninvited from event.
-     * Notification for upcoming events (10 min before/1 day before/etc).
+## Overview
 
-* Time Zones  
-  * Users can see the calendar according to their time zone.
-  * Users can change their time zone via the settings page.
+This is a Spring Boot REST API that supports a multi-user calendar system with authentication, event management, sharing capabilities, and real-time updates.
 
+The system follows a layered architecture using controllers, services, repositories, and domain entities.
 
-## Prerequisites
-* Java 9 or higher
-* Maven
-* A MySQL database
+## Core Features
+
+### Authentication & Users
+
+* Email-based registration and login
+* GitHub OAuth authentication (separated auth service)
+* Role-based access control (filters and permission layer)
+
+### Calendar & Events
+
+* Create, update, and delete events
+* Public and private events
+* Multi-user calendar sharing system
+* Role-based event permissions
+
+### Collaboration Model
+
+* Event invitations with status tracking
+* User roles within events (permission-controlled actions)
+* Ability to join/leave shared events
+
+### Real-time Features
+
+* WebSocket-based updates for calendar changes
+* Event notifications via socket triggers
+
+### Notifications System
+
+* Email and in-app notifications
+* Event lifecycle notifications (invite, update, cancel, etc.)
+
+### Time Zone Support
+
+* User-specific time zone handling
+
+## Architecture
+
+* Spring Boot REST API
+* Layered architecture:
+
+  * Controllers (API layer)
+  * Services (business logic)
+  * Repositories (data access)
+  * Entities (domain model)
+* Modular authentication and GitHub login service
+* Event-driven notification system using WebSockets
+
+## Testing
+
+The project includes unit and integration tests covering:
+
+* authentication flows
+* role permissions
+* service layer logic
+* event handling behavior
+
+## Tech Stack
+
+Java, Spring Boot, Hibernate, MySQL, WebSockets
+
+Client repository: https://github.com/leonShapiro/calendar-client

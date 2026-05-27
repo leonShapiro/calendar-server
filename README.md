@@ -70,4 +70,4 @@ The project includes unit and integration tests covering:
 
 Java, Spring Boot, Hibernate, MySQL, WebSockets
 
-Client repository: https://github.com/leonShapiro/calendar-client
+Client repository: https://github.com/leonShapiro/calendar-client 
